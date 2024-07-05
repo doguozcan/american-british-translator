@@ -39,7 +39,6 @@ class Translator {
     // mx. -> mx
     // dr. -> dr
     for (let [key, value] of Object.entries(americanToBritishTitles)) {
-      console.log(key, value)
       const regex = new RegExp(`${key}`, 'gi')
       translatedText = translatedText.replace(
         regex,
@@ -72,7 +71,7 @@ class Translator {
     // cash machine -> ATM
     // heath robinson device -> rube goldberg device
     for (let [key, value] of Object.entries(britishOnly)) {
-      const regex = new RegExp(`${key}`, 'gi')
+      const regex = new RegExp(`\\b${key}\\b`, 'gi')
       translatedText = translatedText.replace(
         regex,
         `<span class="highlight">${value}</span>`
@@ -107,7 +106,7 @@ class Translator {
     // 11.42 -> 11:42
     // 06.24 -> 06:24
     translatedText = translatedText.replace(
-      /(\d{1,2}):(\d{2})/g,
+      /(\d{1,2})\.(\d{2})/g,
       `<span class="highlight">${'$1:$2'}</span>`
     )
 
